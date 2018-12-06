@@ -2,7 +2,7 @@
  * @Author: junjie.lean 
  * @Date: 2018-12-05 14:27:36 
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2018-12-06 10:56:19
+ * @Last Modified time: 2018-12-06 13:47:50
  */
 
 //饿了么热门商品爬取
@@ -15,7 +15,6 @@ axios.defaults.baseURL = 'https://www.ele.me';
 
 let getRestayrantsNearByLocaltion = async (url) => {
     let restaurantsNearBy = [];
-    // let url = url;
     let res = await axios.get(url);
     let data;
     if (res.status == 200) {
@@ -54,8 +53,8 @@ let getHotMenuByRestaurantsID = async (idlist) => {
         let res = await axios.get(`/restapi/shopping/v2/menu?restaurant_id=${item.id}&terminal=web`);
         let data;
         if (res.status == 200) {
-            console.log(item)
-            console.log(`获取id为${item.id}餐馆热销菜单成功`)
+            console.log(item.name)
+            // console.log(`获取id为${item.id}餐馆热销菜单成功`)
             data = res.data;
         } else {
             console.log('获取id为${item.id}餐馆热销菜单失败')
@@ -86,7 +85,6 @@ getRestayrantsNearByLocaltion(url).then((res) => {
         if (err) {
             console.log('写入文件失败')
         }
-
     })
 }).then(() => {
     console.log('写入文件成功')
